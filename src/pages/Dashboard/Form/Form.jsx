@@ -17,8 +17,8 @@ function Form() {
     const[date, setDate] =useState(today)
     const [itemArr, setItemArr] = useState(0)
     
-    var tempArr = []
-
+    var tempArr = ""
+    var tempData
     const save = () => {
         
         var itemObject = {
@@ -29,17 +29,18 @@ function Form() {
             'unit': unit,
             'date': date, 
             };
-        tempArr.push(itemObject)
-        localStorage.setItem("itemArray", JSON.stringify(tempArr))
-        setItemArr(itemArr+1)
+        
+        
     }
 
     useEffect(()=>{
         console.log('local storage', localStorage.getItem("itemArray"))
-        var tempData = localStorage.getItem("itemArray")
+        console.log(data)
+        tempData = localStorage.getItem("itemArray")
+        console.log('Temp data', tempData)
         setData(JSON.parse(tempData))
         console.log('Use Effect', data)
-        tempArr.push(data)
+        
         console.log('Temp arr from use effect', tempArr)
     },[itemArr])
 
@@ -80,7 +81,7 @@ function Form() {
                         <th className=""><strong>Date</strong></th>
                     </tr>
                 </thead>
-                    {data === [] ? (
+                    {data !== [] ? (
                         <>
                         <tbody>
                         <td colspan="12" className="text-center">
@@ -100,7 +101,7 @@ function Form() {
                         <>
                         
                         <tbody>
-                            
+                        
                              {data.map((product, index)=>
                              <>
                                <tr className="border select-row" key={index}>
@@ -115,6 +116,7 @@ function Form() {
                              </>
                                  
                             )}
+                        
                         </tbody>
                          
                                 

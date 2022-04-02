@@ -3,6 +3,7 @@ import Navbar from '../../components/Navbar/Navbar.jsx'
 import Hero from './Hero/Hero.jsx'
 import Stats from './Stats/Stats.jsx'
 import Pricing from './Pricing/Pricing.jsx'
+import Footer from '../../components/Footer/Footer.jsx'
 function Homepage() {
   return (
     <>
@@ -10,7 +11,7 @@ function Homepage() {
         <Hero />
         <Stats />
         <Pricing />
-        
+        <Footer />
     </>
   )
 }
