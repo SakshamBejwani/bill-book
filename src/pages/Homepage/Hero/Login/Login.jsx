@@ -7,7 +7,7 @@ function Login() {
 
   return (
     <div class="custom-card m-5 p-5 rounded-xl shadow  d-flex flex-column align-items-center justify-content-around">
-        <div class="h4 card-title fw-bold w-100 mb-1">
+        <div class="h3 card-title fw-bold w-100 mb-1">
             Login in to myBillbook
         </div>
         <div class="input-group d-flex flex-column ">
@@ -40,7 +40,7 @@ function Login() {
         </div>
         <div class=" w-100">
                 <div>{isClicked}</div>
-                <button type="button" class="btn btn-secondary w-100" onClick={()=> setIsClicked(true)}>Login</button>
+                <button type="button" class="btn btn-secondary py-2 w-100" onClick={()=> setIsClicked(true)}>Login</button>
             </div>
     </div>
   )

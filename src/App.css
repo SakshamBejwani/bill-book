@@ -184,7 +184,9 @@
 
 }
 .custom-star{
-  height: 35px;;
+  height: 35px;
+  padding-bottom: 5px;
+  margin-left: 5px;
 }
 .pricing-hero-title{
   font-size: 3rem;;
@@ -270,4 +272,8 @@
 }
 .footer-title{
   color: #DB661F;
+}
+.nav-item{
+  cursor: pointer;
+  margin-left: 5px;;
 }

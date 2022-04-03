@@ -1,26 +1,29 @@
 import React, {useState, useEffect} from 'react'
 
 function Form() {
-    const [data, setData] = useState([])
+    const [data, setData] = useState()
 
     var today = new Date();
     var dd = String(today.getDate()).padStart(2, '0');
     var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
     var yyyy = today.getFullYear();
-    today = dd + '/' + mm + '/' + yyyy;
+    // today1 = dd + '/' + mm + '/' + yyyy;
+    today = yyyy + '-' + mm + '-' + dd 
 
     const[item, setItem] =useState('Enter Item Name')
     const[code, setCode] =useState("Enter Item Code")
-    const[sales, setSales] =useState("Rs 0")
-    const[purchase, setPurchase] =useState("Rs 0")
+    const[sales, setSales] =useState("0")
+    const[purchase, setPurchase] =useState("0")
     const[unit, setUnit] =useState("UNIT")
     const[date, setDate] =useState(today)
     const [itemArr, setItemArr] = useState(0)
-    
+    const [loading, setLoading] =useState(true)
+    const [isData, setIsData] = useState(0)
     var tempArr = ""
     var tempData
     const save = () => {
         
+        var itemMainObj = []
         var itemObject = {
             'item': item,
             'code': code,
@@ -29,20 +32,55 @@ function Form() {
             'unit': unit,
             'date': date, 
             };
+        // console.log(itemObject)
+
+        itemMainObj.push(itemObject);
+
+
+
+        var tableData = [];
+
+
+       
+
+        var stored = JSON.parse(localStorage.getItem("tableData"));
+
+        if(stored){
+
+            stored.push(itemObject);
+
+            localStorage.setItem("tableData", JSON.stringify(stored));
+
+            var result = JSON.parse(localStorage.getItem("tableData"));
+
+            console.log(result);
+        }
+        else{
+            tableData.push(itemObject);
+            localStorage.setItem("tableData", JSON.stringify(tableData));
+        }
         
-        
+        setItemArr(itemArr+1)
     }
 
-    useEffect(()=>{
-        console.log('local storage', localStorage.getItem("itemArray"))
-        console.log(data)
-        tempData = localStorage.getItem("itemArray")
-        console.log('Temp data', tempData)
-        setData(JSON.parse(tempData))
-        console.log('Use Effect', data)
-        
-        console.log('Temp arr from use effect', tempArr)
-    },[itemArr])
+    function edit( index ) {
+        console.log('heyy')
+    }
+
+    useEffect(() => {
+        var stored = JSON.parse(localStorage.getItem("tableData"));
+        if(stored){
+            setData(stored)
+            setIsData(99)
+        }
+        else{
+            setData([])
+        }
+        setLoading(false)
+    }, [itemArr])
+    
+
+    
 
   return (
     <div class="container-fluid">
@@ -72,7 +110,7 @@ function Form() {
                 <table class="table">
                 <thead class="border bg-table-head" >
                                     
-                    <tr>
+                    <tr onClick={edit}>
                         <th className=""><strong>Item Name</strong></th>
                         <th className=""><strong>Item Code</strong></th>
                         <th className=""><strong>Selling Price</strong></th>
@@ -81,47 +119,65 @@ function Form() {
                         <th className=""><strong>Date</strong></th>
                     </tr>
                 </thead>
-                    {data !== [] ? (
-                        <>
-                        <tbody>
-                        <td colspan="12" className="text-center">
-                        <div class="row mt-5 py-5 inventory-none d-flex flex-column align-items-center justify-content-center">
-                                <div class="inventory-img">
-                                    <img src="icn_Inventory Reports.svg" alt="no inventory" />
-                                </div>
-                                <div class="inventory-text">
-                                    <h5>You do not have any items to display</h5>
-                                </div>
-                            </div>
-                            </td>
-                        </tbody>
-                            
-                        </>
-                    ):(
-                        <>
-                        
-                        <tbody>
-                        
-                             {data.map((product, index)=>
-                             <>
-                               <tr className="border select-row" key={index}>
-                                    <td><strong class="price fw-bold">{product.item}</strong></td>
-                                    <td><strong class="price fw-bold">{product.code}</strong></td>
-                                    <td><strong class="price fw-bold">Rs. {product.sales}</strong></td>
-                                    <td><strong class="price fw-bold">Rs. {product.purchase}</strong></td>
-                                    <td><strong class="price fw-bold">{product.unit}</strong></td>
-                                    <td><strong class="price fw-bold">{product.date}</strong></td>
+
+                {loading ?(
+                <>
+                
+                {/* Loading the local data */}
+
+
+                </>) : 
+                (
+                <>
+                 {console.log('descion', data)}
+                    { isData == 0
+                            ? (
+                                <>
+                                <tbody>
+                                <td colspan="12" className="text-center">
+                                <div class="row mt-5 py-5 inventory-none d-flex flex-column align-items-center justify-content-center">
+                                        <div class="inventory-img">
+                                            <img src="icn_Inventory Reports.svg" alt="no inventory" />
+                                        </div>
+                                        <div class="inventory-text">
+                                            <h5>You do not have any items to display</h5>
+                                        </div>
+                                    </div>
+                                    </td>
+                                </tbody>
                                     
-                                </tr>
-                             </>
-                                 
-                            )}
-                        
-                        </tbody>
-                         
+                                </>
+                            ):(
+                                <>
+                                    {console.log('data', data)}
+                                <tbody>
                                 
-                        </>
-                    )}
+                                    {data.map((item, index)=>
+                                    
+                                    <>
+                                    
+                                    <tr className="border select-row" key={index} onClick={edit(index)}>
+                                            <td><strong class="price fw-bold">{item.item}</strong></td>
+                                            <td><strong class="price fw-bold">{item.code}</strong></td>
+                                            <td><strong class="price fw-bold"> ₹ {item.sales}</strong></td>
+                                            <td><strong class="price fw-bold"> ₹ {item.purchase}</strong></td>
+                                            <td><strong class="price fw-bold">{item.unit}</strong></td>
+                                            <td><strong class="price fw-bold">{item.date}</strong></td>
+                                            
+                                        </tr>
+                                    </>
+                                        
+                                    )}
+                                
+                                </tbody>
+                                
+                                        
+                                </>
+                            )}
+
+                    </>)}
+
+
                 </table>
                 
                 

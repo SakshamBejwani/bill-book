@@ -5,7 +5,7 @@ function Footer() {
     <><div class="container-fluid pb-5">
         <div class="row w-100 px-5">
         <div class="row w-100 px-5 mt-5 d-flex justify-content-center">
-            <div class="col-4 px-5">
+            <div class="col-4 px-5 pb-5">
                 <div class="footer-title h4 fw-bold my-3">Get in Touch</div>
                 <div class="h5">help@flobiz.in</div>
                 <div class="h3">+91 74004 17400</div>
@@ -23,7 +23,7 @@ function Footer() {
                 </div>
 
             </div>
-            <div class="col-2">
+            <div class="col-2 pb-5">
                 <div class="footer-title h4 fw-bold my-3">Information</div>
                 <p>Refund Policy</p>
                 <p>Privacy Policy</p>
@@ -35,7 +35,7 @@ function Footer() {
                 <p>FloBiz's Business Group</p>
                 <p>Blogs</p>
             </div>
-            <div class="col-4 px-5">
+            <div class="col-4 px-5 pb-5">
                 <div class="footer-title h4 fw-bold my-3">Follow Us</div>
                 <div class="social">
                     <img class="mr-2" src=" icn_youtube.svg" alt="" />
