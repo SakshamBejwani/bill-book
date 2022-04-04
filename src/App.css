@@ -152,7 +152,8 @@
   color: #686665;
   font-size: 2rem;
   font-weight: bolder;
-  margin-top: 2rem;;
+  margin-top: 2rem;
+  margin-bottom: 4rem;
 }
 .hero-logos{
   padding-top: 10%;
@@ -276,4 +277,11 @@
 .nav-item{
   cursor: pointer;
   margin-left: 5px;;
+}
+.resend-btn{
+  background-color: #DB661F;
+  padding: 5px;
+  border-radius: 5%;
+  color: white;
+  cursor: pointer;
 }
