@@ -12,7 +12,7 @@ function Footer() {
                 <div class="mt-3">
                     <button type="button" class="btn px-3 py-1 mr-3 whatsapp-button">
                             <img class="mr-2" src="icn_whatsapp.svg" alt="" />
-                            WhatsApp us
+                            WhatsApp us at
                     </button>
                     <button type="button" class="btn px-3 py-1 chat-button">
                             <img class="mr-2" src="icn_chat with us.svg" alt="" />
